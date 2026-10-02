@@ -7,7 +7,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
     <!-- Google Fonts Inter -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
     <script>
@@ -67,15 +67,11 @@
                 <div class="absolute left-4 -top-4 w-20 h-20 bg-water-500/10 rounded-full blur-md pointer-events-none"></div>
                 
                 <div class="relative z-10 text-center">
-                    <div class="inline-flex items-center justify-center space-x-1.5 bg-white/60 backdrop-blur-sm px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider text-water-800 mb-2 shadow-sm border border-white/40">
-                        <i class="fa-solid fa-water text-water-600"></i>
-                        <span>Mệnh Thủy • Phong Thủy May Mắn</span>
-                    </div>
                     <h1 class="text-2xl font-black tracking-tight text-water-900 uppercase">
                         Bảng Tính Trả Góp
                     </h1>
                     <p class="text-water-800 font-bold text-sm tracking-wide mt-0.5">
-                        HD SAISON
+                        🍀 HD SAISON 🍀
                     </p>
                 </div>
             </header>
@@ -90,7 +86,6 @@
                     <div>
                         <label for="inputPrice" class="block text-xs font-extrabold text-water-900 uppercase tracking-wider mb-1.5 flex justify-between items-center">
                             <span><i class="fa-solid fa-tag text-water-600 mr-1.5"></i>Giá sản phẩm (VNĐ)</span>
-                            <span class="text-[10px] text-slate-400 font-medium lowercase">nhập số thuần</span>
                         </label>
                         <div class="relative">
                             <input 
@@ -110,7 +105,6 @@
                             <label for="inputDownAmount" class="block text-xs font-extrabold text-water-900 uppercase tracking-wider">
                                 <i class="fa-solid fa-hand-holding-dollar text-amber-500 mr-1.5"></i>Trả trước
                             </label>
-                            <span class="text-[10px] text-slate-400 font-medium">Số tiền / Tỷ lệ %</span>
                         </div>
                         
                         <div class="grid grid-cols-12 gap-2">
@@ -154,7 +148,7 @@
                     </div>
 
                     <!-- 3. Bảng Hiển Thị Khoản Vay & Nút Đặt Lại -->
-                    <div class="bg-gradient-to-r from-water-900 to-water-darkNavy text-white rounded-xl p-3.5 flex justify-between items-center shadow-inner border border-water-800">
+                    <div class="bg-gradient-to-r from-water-700 to-water-700 text-white rounded-xl p-3.5 flex justify-between items-center shadow-inner border border-water-800">
                         <div>
                             <span class="text-[11px] uppercase tracking-wider font-semibold text-water-200 block">Khoản Vay Còn Lại</span>
                             <span id="displayLoan" class="text-xl font-black text-amber-300">0 đ</span>
@@ -182,13 +176,12 @@
                                 <span class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
                                 <h2 class="font-extrabold text-sm uppercase tracking-wide">Gói Lãi Suất 1%</h2>
                             </div>
-                            <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full text-white font-semibold">HD SAISON</span>
                         </div>
                         
                         <div class="p-3">
                             <div class="grid grid-cols-12 text-[11px] font-bold text-slate-400 border-b border-slate-100 pb-2 px-1">
                                 <div class="col-span-4 uppercase">Kỳ hạn</div>
-                                <div class="col-span-4 text-right uppercase">Mỗi tháng</div>
+                                <div class="col-span-4 text-center uppercase">Mỗi tháng</div>
                                 <div class="col-span-4 text-right uppercase">Chênh lệch</div>
                             </div>
                             
@@ -196,28 +189,25 @@
                                 <!-- 6 Tháng -->
                                 <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
                                     <div class="col-span-4 flex items-center space-x-1.5">
-                                        <span class="w-6 h-6 rounded-md bg-water-100 text-water-800 font-bold text-xs flex items-center justify-center border border-water-200">6</span>
-                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                        <span class="w-16 h-6 rounded-md bg-water-100 text-water-800 font-bold text-xs flex items-center justify-center border border-water-200">6 Tháng</span>
                                     </div>
-                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p1_6m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-center font-extrabold text-slate-800 text-sm" id="p1_6m_monthly">0 đ</div>
                                     <div class="col-span-4 text-right font-bold text-rose-600 text-xs" id="p1_6m_diff">0 đ</div>
                                 </div>
                                 <!-- 9 Tháng -->
                                 <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
                                     <div class="col-span-4 flex items-center space-x-1.5">
-                                        <span class="w-6 h-6 rounded-md bg-water-100 text-water-800 font-bold text-xs flex items-center justify-center border border-water-200">9</span>
-                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                        <span class="w-16 h-6 rounded-md bg-water-100 text-water-800 font-bold text-xs flex items-center justify-center border border-water-200">9 Tháng</span>
                                     </div>
-                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p1_9m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-center font-extrabold text-slate-800 text-sm" id="p1_9m_monthly">0 đ</div>
                                     <div class="col-span-4 text-right font-bold text-rose-600 text-xs" id="p1_9m_diff">0 đ</div>
                                 </div>
                                 <!-- 12 Tháng -->
                                 <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
                                     <div class="col-span-4 flex items-center space-x-1.5">
-                                        <span class="w-6 h-6 rounded-md bg-water-100 text-water-800 font-bold text-xs flex items-center justify-center border border-water-200">12</span>
-                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                        <span class="w-16 h-6 rounded-md bg-water-100 text-water-800 font-bold text-xs flex items-center justify-center border border-water-200">12 Tháng</span>
                                     </div>
-                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p1_12m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-center font-extrabold text-slate-800 text-sm" id="p1_12m_monthly">0 đ</div>
                                     <div class="col-span-4 text-right font-bold text-rose-600 text-xs" id="p1_12m_diff">0 đ</div>
                                 </div>
                             </div>
@@ -231,13 +221,12 @@
                                 <span class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
                                 <h2 class="font-extrabold text-sm uppercase tracking-wide">Gói Lãi Suất 0,5%</h2>
                             </div>
-                            <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full text-white font-semibold">Ưu đãi</span>
                         </div>
                         
                         <div class="p-3">
                             <div class="grid grid-cols-12 text-[11px] font-bold text-slate-400 border-b border-slate-100 pb-2 px-1">
                                 <div class="col-span-4 uppercase">Kỳ hạn</div>
-                                <div class="col-span-4 text-right uppercase">Mỗi tháng</div>
+                                <div class="col-span-4 text-center uppercase">Mỗi tháng</div>
                                 <div class="col-span-4 text-right uppercase">Chênh lệch</div>
                             </div>
                             
@@ -245,20 +234,18 @@
                                 <!-- 6 Tháng -->
                                 <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
                                     <div class="col-span-4 flex items-center space-x-1.5">
-                                        <span class="w-6 h-6 rounded-md bg-teal-50 text-teal-700 font-bold text-xs flex items-center justify-center border border-teal-200">6</span>
-                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                        <span class="w-16 h-6 rounded-md bg-teal-50 text-teal-700 font-bold text-xs flex items-center justify-center border border-teal-200">6 Tháng</span>
                                     </div>
-                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p05_6m_monthly">0 đ</div>
-                                    <div class="col-span-4 text-right font-bold text-teal-700 text-xs" id="p05_6m_diff">0 đ</div>
+                                    <div class="col-span-4 text-center font-extrabold text-slate-800 text-sm" id="p05_6m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-right font-bold text-rose-600 text-xs" id="p05_6m_diff">0 đ</div>
                                 </div>
                                 <!-- 9 Tháng -->
                                 <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
                                     <div class="col-span-4 flex items-center space-x-1.5">
-                                        <span class="w-6 h-6 rounded-md bg-teal-50 text-teal-700 font-bold text-xs flex items-center justify-center border border-teal-200">9</span>
-                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                        <span class="w-16 h-6 rounded-md bg-teal-50 text-teal-700 font-bold text-xs flex items-center justify-center border border-teal-200">9 Tháng</span>
                                     </div>
-                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p05_9m_monthly">0 đ</div>
-                                    <div class="col-span-4 text-right font-bold text-teal-700 text-xs" id="p05_9m_diff">0 đ</div>
+                                    <div class="col-span-4 text-center font-extrabold text-slate-800 text-sm" id="p05_9m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-right font-bold text-rose-600 text-xs" id="p05_9m_diff">0 đ</div>
                                 </div>
                             </div>
                         </div>
@@ -271,13 +258,12 @@
                                 <span class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
                                 <h2 class="font-extrabold text-sm uppercase tracking-wide">Gói Lãi Suất 0%</h2>
                             </div>
-                            <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full text-white font-semibold">Đặc biệt</span>
                         </div>
                         
                         <div class="p-3">
                             <div class="grid grid-cols-12 text-[11px] font-bold text-slate-400 border-b border-slate-100 pb-2 px-1">
                                 <div class="col-span-4 uppercase">Kỳ hạn</div>
-                                <div class="col-span-4 text-right uppercase">Mỗi tháng</div>
+                                <div class="col-span-4 text-center uppercase">Mỗi tháng</div>
                                 <div class="col-span-4 text-right uppercase">Chênh lệch</div>
                             </div>
                             
@@ -285,11 +271,10 @@
                                 <!-- 6 Tháng -->
                                 <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
                                     <div class="col-span-4 flex items-center space-x-1.5">
-                                        <span class="w-6 h-6 rounded-md bg-sky-50 text-sky-700 font-bold text-xs flex items-center justify-center border border-sky-200">6</span>
-                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                        <span class="w-16 h-6 rounded-md bg-sky-50 text-sky-700 font-bold text-xs flex items-center justify-center border border-sky-200">6 Tháng</span>
                                     </div>
-                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p0_6m_monthly">0 đ</div>
-                                    <div class="col-span-4 text-right font-bold text-sky-700 text-xs" id="p0_6m_diff">0 đ</div>
+                                    <div class="col-span-4 text-center font-extrabold text-slate-800 text-sm" id="p0_6m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-right font-bold text-rose-600 text-xs" id="p0_6m_diff">0 đ</div>
                                 </div>
                             </div>
                         </div>
@@ -301,8 +286,7 @@
 
         <!-- Footer -->
         <footer class="mt-auto px-4 py-4 text-center text-xs text-slate-500 border-t border-water-200 bg-white">
-            <p class="font-bold text-water-900">HD SAISON Calculator • Mệnh Thủy (#B4E1EB)</p>
-            <p class="text-[10px] text-slate-400 mt-0.5">Làm tròn chính xác theo công thức trả góp tiêu chuẩn</p>
+            <p class="font-bold text-water-900">🍀 © 2026 Thúy Hằng HD SAISON, Inc. 🍀</p>
         </footer>
     </div>
 
@@ -407,13 +391,13 @@
 
             // Render Gói 1%
             elP1_6m_m.textContent = `${formatVND(p1_6m_m)} đ`;
-            elP1_6m_d.textContent = `+${formatVND(p1_6m_d)} đ`;
+            elP1_6m_d.textContent = `${formatVND(p1_6m_d)} đ`;
 
             elP1_9m_m.textContent = `${formatVND(p1_9m_m)} đ`;
-            elP1_9m_d.textContent = `+${formatVND(p1_9m_d)} đ`;
+            elP1_9m_d.textContent = `${formatVND(p1_9m_d)} đ`;
 
             elP1_12m_m.textContent = `${formatVND(p1_12m_m)} đ`;
-            elP1_12m_d.textContent = `+${formatVND(p1_12m_d)} đ`;
+            elP1_12m_d.textContent = `${formatVND(p1_12m_d)} đ`;
 
 
             // --- 2. GÓI LÃI SUẤT 0,5% ---
@@ -427,10 +411,10 @@
 
             // Render Gói 0.5%
             elP05_6m_m.textContent = `${formatVND(p05_6m_m)} đ`;
-            elP05_6m_d.textContent = `+${formatVND(p05_6m_d)} đ`;
+            elP05_6m_d.textContent = `${formatVND(p05_6m_d)} đ`;
 
             elP05_9m_m.textContent = `${formatVND(p05_9m_m)} đ`;
-            elP05_9m_d.textContent = `+${formatVND(p05_9m_d)} đ`;
+            elP05_9m_d.textContent = `${formatVND(p05_9m_d)} đ`;
 
 
             // --- 3. GÓI LÃI SUẤT 0% ---
@@ -440,7 +424,7 @@
 
             // Render Gói 0%
             elP0_6m_m.textContent = `${formatVND(p0_6m_m)} đ`;
-            elP0_6m_d.textContent = `+${formatVND(p0_6m_d)} đ`;
+            elP0_6m_d.textContent = `${formatVND(p0_6m_d)} đ`;
         }
 
         /**
