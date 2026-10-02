@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bảng Tính Trả Góp HD SAISON</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        water: {
+                            50: '#f0f9fb',
+                            100: '#e1f3f7',
+                            200: '#b4e1eb', // Màu chủ đạo Xanh biển nhạt (#B4E1EB - Mệnh Thủy)
+                            300: '#8ed0df',
+                            400: '#5ab9d0',
+                            500: '#2d99b3',
+                            600: '#1e7a91',
+                            700: '#1a6174',
+                            800: '#174f5f',
+                            900: '#0c2b38', // Dark Navy tương phản cao
+                            darkNavy: '#081c26'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #edf5f8;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Custom smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b4e1eb;
+            border-radius: 9999px;
+        }
+        .toast-slide {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen pb-10">
+    <!-- App Container (Mobile First Layout) -->
+    <div class="max-w-md mx-auto min-h-screen flex flex-col justify-between shadow-xl bg-slate-50 border-x border-water-200">
+        
+        <div>
+            <!-- Header Section (Màu Xanh Biển Nhạt #B4E1EB & Chữ Navy Đậm Tương Phạn High-Contrast) -->
+            <header class="bg-gradient-to-br from-[#B4E1EB] via-[#9ad7e5] to-[#73c8dc] text-water-900 px-5 py-6 rounded-b-3xl shadow-md relative overflow-hidden border-b border-water-300">
+                <!-- Visual Water Decorative Elements -->
+                <div class="absolute -right-8 -bottom-8 w-36 h-36 bg-white/25 rounded-full blur-xl pointer-events-none"></div>
+                <div class="absolute left-4 -top-4 w-20 h-20 bg-water-500/10 rounded-full blur-md pointer-events-none"></div>
+                
+                <div class="relative z-10 text-center">
+                    <div class="inline-flex items-center justify-center space-x-1.5 bg-white/60 backdrop-blur-sm px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider text-water-800 mb-2 shadow-sm border border-white/40">
+                        <i class="fa-solid fa-water text-water-600"></i>
+                        <span>Mệnh Thủy • Phong Thủy May Mắn</span>
+                    </div>
+                    <h1 class="text-2xl font-black tracking-tight text-water-900 uppercase">
+                        Bảng Tính Trả Góp
+                    </h1>
+                    <p class="text-water-800 font-bold text-sm tracking-wide mt-0.5">
+                        HD SAISON
+                    </p>
+                </div>
+            </header>
+
+            <!-- Main Input Area -->
+            <main class="p-4 space-y-4 -mt-2">
+                
+                <!-- Card Nhập Dữ Liệu -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-water-200 space-y-4">
+                    
+                    <!-- 1. Giá Sản Phẩm -->
+                    <div>
+                        <label for="inputPrice" class="block text-xs font-extrabold text-water-900 uppercase tracking-wider mb-1.5 flex justify-between items-center">
+                            <span><i class="fa-solid fa-tag text-water-600 mr-1.5"></i>Giá sản phẩm (VNĐ)</span>
+                            <span class="text-[10px] text-slate-400 font-medium lowercase">nhập số thuần</span>
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                id="inputPrice" 
+                                inputmode="numeric" 
+                                placeholder="0" 
+                                class="w-full bg-water-50/50 border border-slate-300 focus:border-water-500 focus:ring-2 focus:ring-water-200 rounded-xl px-3.5 py-3 text-lg font-extrabold text-slate-800 pr-10 transition-all outline-none"
+                            />
+                            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">đ</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Trả Trước (Số tiền & %) -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <label for="inputDownAmount" class="block text-xs font-extrabold text-water-900 uppercase tracking-wider">
+                                <i class="fa-solid fa-hand-holding-dollar text-amber-500 mr-1.5"></i>Trả trước
+                            </label>
+                            <span class="text-[10px] text-slate-400 font-medium">Số tiền / Tỷ lệ %</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-12 gap-2">
+                            <!-- Nhập số tiền trả trước -->
+                            <div class="col-span-7 relative">
+                                <input 
+                                    type="text" 
+                                    id="inputDownAmount" 
+                                    inputmode="numeric" 
+                                    placeholder="0" 
+                                    class="w-full bg-water-50/50 border border-slate-300 focus:border-water-500 focus:ring-2 focus:ring-water-200 rounded-xl px-3 py-2.5 text-base font-bold text-slate-800 pr-8 transition-all outline-none"
+                                />
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs">đ</span>
+                            </div>
+
+                            <!-- Nhập phần trăm trả trước -->
+                            <div class="col-span-5 relative">
+                                <input 
+                                    type="number" 
+                                    id="inputDownPercent" 
+                                    inputmode="decimal" 
+                                    placeholder="0" 
+                                    min="0"
+                                    max="100"
+                                    step="any"
+                                    class="w-full bg-water-50/50 border border-slate-300 focus:border-water-500 focus:ring-2 focus:ring-water-200 rounded-xl px-3 py-2.5 text-base font-bold text-slate-800 pr-7 transition-all outline-none"
+                                />
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs">%</span>
+                            </div>
+                        </div>
+
+                        <!-- Các Nút Chọn % Nhanh -->
+                        <div class="flex items-center space-x-1.5 pt-1 overflow-x-auto pb-1">
+                            <span class="text-[10px] text-slate-400 font-semibold whitespace-nowrap">Nhanh:</span>
+                            <button type="button" onclick="setPresetPercent(10)" class="px-2.5 py-1 text-xs font-bold bg-slate-100 hover:bg-water-200 text-water-900 rounded-lg transition-colors border border-slate-200 active:scale-95">10%</button>
+                            <button type="button" onclick="setPresetPercent(20)" class="px-2.5 py-1 text-xs font-bold bg-slate-100 hover:bg-water-200 text-water-900 rounded-lg transition-colors border border-slate-200 active:scale-95">20%</button>
+                            <button type="button" onclick="setPresetPercent(30)" class="px-2.5 py-1 text-xs font-bold bg-slate-100 hover:bg-water-200 text-water-900 rounded-lg transition-colors border border-slate-200 active:scale-95">30%</button>
+                            <button type="button" onclick="setPresetPercent(40)" class="px-2.5 py-1 text-xs font-bold bg-slate-100 hover:bg-water-200 text-water-900 rounded-lg transition-colors border border-slate-200 active:scale-95">40%</button>
+                            <button type="button" onclick="setPresetPercent(50)" class="px-2.5 py-1 text-xs font-bold bg-slate-100 hover:bg-water-200 text-water-900 rounded-lg transition-colors border border-slate-200 active:scale-95">50%</button>
+                        </div>
+                    </div>
+
+                    <!-- 3. Bảng Hiển Thị Khoản Vay & Nút Đặt Lại -->
+                    <div class="bg-gradient-to-r from-water-900 to-water-darkNavy text-white rounded-xl p-3.5 flex justify-between items-center shadow-inner border border-water-800">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-wider font-semibold text-water-200 block">Khoản Vay Còn Lại</span>
+                            <span id="displayLoan" class="text-xl font-black text-amber-300">0 đ</span>
+                        </div>
+                        <button 
+                            type="button" 
+                            id="btnReset" 
+                            onclick="resetAll()" 
+                            class="bg-water-800/80 hover:bg-water-700 text-water-100 px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1.5 transition-all border border-water-600 active:scale-95"
+                        >
+                            <i class="fa-solid fa-rotate-left text-amber-300"></i>
+                            <span>Đặt lại</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- RESULTS SECTION - CÁC GÓI LÃI SUẤT -->
+                <div class="space-y-3.5" id="resultsContainer">
+                    
+                    <!-- GÓI 1: Lãi suất 1% -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-water-200">
+                        <div class="bg-gradient-to-r from-water-800 to-water-600 px-4 py-2.5 text-white flex justify-between items-center">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
+                                <h2 class="font-extrabold text-sm uppercase tracking-wide">Gói Lãi Suất 1%</h2>
+                            </div>
+                            <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full text-white font-semibold">HD SAISON</span>
+                        </div>
+                        
+                        <div class="p-3">
+                            <div class="grid grid-cols-12 text-[11px] font-bold text-slate-400 border-b border-slate-100 pb-2 px-1">
+                                <div class="col-span-4 uppercase">Kỳ hạn</div>
+                                <div class="col-span-4 text-right uppercase">Mỗi tháng</div>
+                                <div class="col-span-4 text-right uppercase">Chênh lệch</div>
+                            </div>
+                            
+                            <div class="divide-y divide-slate-100">
+                                <!-- 6 Tháng -->
+                                <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
+                                    <div class="col-span-4 flex items-center space-x-1.5">
+                                        <span class="w-6 h-6 rounded-md bg-water-100 text-water-800 font-bold text-xs flex items-center justify-center border border-water-200">6</span>
+                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                    </div>
+                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p1_6m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-right font-bold text-rose-600 text-xs" id="p1_6m_diff">0 đ</div>
+                                </div>
+                                <!-- 9 Tháng -->
+                                <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
+                                    <div class="col-span-4 flex items-center space-x-1.5">
+                                        <span class="w-6 h-6 rounded-md bg-water-100 text-water-800 font-bold text-xs flex items-center justify-center border border-water-200">9</span>
+                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                    </div>
+                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p1_9m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-right font-bold text-rose-600 text-xs" id="p1_9m_diff">0 đ</div>
+                                </div>
+                                <!-- 12 Tháng -->
+                                <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
+                                    <div class="col-span-4 flex items-center space-x-1.5">
+                                        <span class="w-6 h-6 rounded-md bg-water-100 text-water-800 font-bold text-xs flex items-center justify-center border border-water-200">12</span>
+                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                    </div>
+                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p1_12m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-right font-bold text-rose-600 text-xs" id="p1_12m_diff">0 đ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GÓI 2: Lãi suất 0,5% -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-water-200">
+                        <div class="bg-gradient-to-r from-teal-700 to-water-600 px-4 py-2.5 text-white flex justify-between items-center">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
+                                <h2 class="font-extrabold text-sm uppercase tracking-wide">Gói Lãi Suất 0,5%</h2>
+                            </div>
+                            <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full text-white font-semibold">Ưu đãi</span>
+                        </div>
+                        
+                        <div class="p-3">
+                            <div class="grid grid-cols-12 text-[11px] font-bold text-slate-400 border-b border-slate-100 pb-2 px-1">
+                                <div class="col-span-4 uppercase">Kỳ hạn</div>
+                                <div class="col-span-4 text-right uppercase">Mỗi tháng</div>
+                                <div class="col-span-4 text-right uppercase">Chênh lệch</div>
+                            </div>
+                            
+                            <div class="divide-y divide-slate-100">
+                                <!-- 6 Tháng -->
+                                <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
+                                    <div class="col-span-4 flex items-center space-x-1.5">
+                                        <span class="w-6 h-6 rounded-md bg-teal-50 text-teal-700 font-bold text-xs flex items-center justify-center border border-teal-200">6</span>
+                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                    </div>
+                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p05_6m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-right font-bold text-teal-700 text-xs" id="p05_6m_diff">0 đ</div>
+                                </div>
+                                <!-- 9 Tháng -->
+                                <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
+                                    <div class="col-span-4 flex items-center space-x-1.5">
+                                        <span class="w-6 h-6 rounded-md bg-teal-50 text-teal-700 font-bold text-xs flex items-center justify-center border border-teal-200">9</span>
+                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                    </div>
+                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p05_9m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-right font-bold text-teal-700 text-xs" id="p05_9m_diff">0 đ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GÓI 3: Lãi suất 0% -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-water-200">
+                        <div class="bg-gradient-to-r from-sky-700 to-cyan-600 px-4 py-2.5 text-white flex justify-between items-center">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
+                                <h2 class="font-extrabold text-sm uppercase tracking-wide">Gói Lãi Suất 0%</h2>
+                            </div>
+                            <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full text-white font-semibold">Đặc biệt</span>
+                        </div>
+                        
+                        <div class="p-3">
+                            <div class="grid grid-cols-12 text-[11px] font-bold text-slate-400 border-b border-slate-100 pb-2 px-1">
+                                <div class="col-span-4 uppercase">Kỳ hạn</div>
+                                <div class="col-span-4 text-right uppercase">Mỗi tháng</div>
+                                <div class="col-span-4 text-right uppercase">Chênh lệch</div>
+                            </div>
+                            
+                            <div class="divide-y divide-slate-100">
+                                <!-- 6 Tháng -->
+                                <div class="grid grid-cols-12 items-center py-2.5 px-1 hover:bg-water-50/50 transition-colors rounded-lg">
+                                    <div class="col-span-4 flex items-center space-x-1.5">
+                                        <span class="w-6 h-6 rounded-md bg-sky-50 text-sky-700 font-bold text-xs flex items-center justify-center border border-sky-200">6</span>
+                                        <span class="font-bold text-slate-700 text-xs">Tháng</span>
+                                    </div>
+                                    <div class="col-span-4 text-right font-extrabold text-slate-800 text-sm" id="p0_6m_monthly">0 đ</div>
+                                    <div class="col-span-4 text-right font-bold text-sky-700 text-xs" id="p0_6m_diff">0 đ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-auto px-4 py-4 text-center text-xs text-slate-500 border-t border-water-200 bg-white">
+            <p class="font-bold text-water-900">HD SAISON Calculator • Mệnh Thủy (#B4E1EB)</p>
+            <p class="text-[10px] text-slate-400 mt-0.5">Làm tròn chính xác theo công thức trả góp tiêu chuẩn</p>
+        </footer>
+    </div>
+
+    <!-- Toast Thông Báo Nhẹ -->
+    <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-water-900 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-2xl opacity-0 pointer-events-none toast-slide flex items-center space-x-2 z-50 border border-water-700">
+        <i class="fa-solid fa-circle-info text-amber-300"></i>
+        <span id="toastMsg">Đã cập nhật</span>
+    </div>
+
+    <script>
+        // DOM Elements
+        const elPrice = document.getElementById('inputPrice');
+        const elDownAmount = document.getElementById('inputDownAmount');
+        const elDownPercent = document.getElementById('inputDownPercent');
+        const elLoan = document.getElementById('displayLoan');
+
+        // Results DOM Elements
+        // Gói 1%
+        const elP1_6m_m = document.getElementById('p1_6m_monthly');
+        const elP1_6m_d = document.getElementById('p1_6m_diff');
+        const elP1_9m_m = document.getElementById('p1_9m_monthly');
+        const elP1_9m_d = document.getElementById('p1_9m_diff');
+        const elP1_12m_m = document.getElementById('p1_12m_monthly');
+        const elP1_12m_d = document.getElementById('p1_12m_diff');
+
+        // Gói 0.5%
+        const elP05_6m_m = document.getElementById('p05_6m_monthly');
+        const elP05_6m_d = document.getElementById('p05_6m_diff');
+        const elP05_9m_m = document.getElementById('p05_9m_monthly');
+        const elP05_9m_d = document.getElementById('p05_9m_diff');
+
+        // Gói 0%
+        const elP0_6m_m = document.getElementById('p0_6m_monthly');
+        const elP0_6m_d = document.getElementById('p0_6m_diff');
+
+        /**
+         * Chuyển đổi số thành chuỗi hiển thị có dấu chấm phân cách hàng nghìn (VD: 15.000.000)
+         */
+        function formatVND(val) {
+            if (val === null || val === undefined || isNaN(val) || val === '' || val === 0) return '0';
+            const num = Math.round(Number(val));
+            return new Intl.NumberFormat('vi-VN').format(num);
+        }
+
+        /**
+         * Lấy giá trị số nguyên thuần túy từ chuỗi chứa dấu chấm / khoảng trắng
+         */
+        function parseCleanNumber(str) {
+            if (!str) return 0;
+            const cleanStr = str.toString().replace(/[^0-9]/g, '');
+            return parseInt(cleanStr, 10) || 0;
+        }
+
+        /**
+         * Hiển thị Toast thông báo
+         */
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = message;
+            
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2000);
+        }
+
+        /**
+         * CÔNG THỨC VÀ TÍNH TOÁN TOÀN BỘ BẢNG TÍNH
+         */
+        function calculate() {
+            const price = parseCleanNumber(elPrice.value);
+            const downAmount = parseCleanNumber(elDownAmount.value);
+            
+            // Khoản vay = Giá - Trả trước
+            let loanKV = price - downAmount;
+            if (loanKV < 0) loanKV = 0;
+
+            // Hiển thị khoản vay
+            elLoan.textContent = `${formatVND(loanKV)} đ`;
+
+            if (price <= 0 || loanKV <= 0) {
+                resetOutputs();
+                return;
+            }
+
+            // --- 1. GÓI LÃI SUẤT 1% ---
+            // 6 tháng
+            const p1_6m_m = Math.round(loanKV * (1/6 + 0.005 + 0.013969696969697) + 12000);
+            const p1_6m_d = (p1_6m_m * 6) - loanKV;
+            
+            // 9 tháng
+            const p1_9m_m = Math.round(loanKV * (1/9 + 0.005 + 0.0107777777777778) + 12000);
+            const p1_9m_d = (p1_9m_m * 9) - loanKV;
+
+            // 12 tháng
+            const p1_12m_m = Math.round(loanKV * (1/12 + 0.005 + 0.00921212121212122) + 12000);
+            const p1_12m_d = (p1_12m_m * 12) - loanKV;
+
+            // Render Gói 1%
+            elP1_6m_m.textContent = `${formatVND(p1_6m_m)} đ`;
+            elP1_6m_d.textContent = `+${formatVND(p1_6m_d)} đ`;
+
+            elP1_9m_m.textContent = `${formatVND(p1_9m_m)} đ`;
+            elP1_9m_d.textContent = `+${formatVND(p1_9m_d)} đ`;
+
+            elP1_12m_m.textContent = `${formatVND(p1_12m_m)} đ`;
+            elP1_12m_d.textContent = `+${formatVND(p1_12m_d)} đ`;
+
+
+            // --- 2. GÓI LÃI SUẤT 0,5% ---
+            // 6 tháng
+            const p05_6m_m = Math.round(loanKV * (1/6 + 0.005 + 0.00869696969696971) + 12000);
+            const p05_6m_d = (p05_6m_m * 6) - loanKV;
+
+            // 9 tháng
+            const p05_9m_m = Math.round(loanKV * (1/9 + 0.005 + 0.00566666666666667) + 12000);
+            const p05_9m_d = (p05_9m_m * 9) - loanKV;
+
+            // Render Gói 0.5%
+            elP05_6m_m.textContent = `${formatVND(p05_6m_m)} đ`;
+            elP05_6m_d.textContent = `+${formatVND(p05_6m_d)} đ`;
+
+            elP05_9m_m.textContent = `${formatVND(p05_9m_m)} đ`;
+            elP05_9m_d.textContent = `+${formatVND(p05_9m_d)} đ`;
+
+
+            // --- 3. GÓI LÃI SUẤT 0% ---
+            // 6 tháng
+            const p0_6m_m = Math.round((loanKV / 6) + (loanKV / 6) * 0.05 + 12000);
+            const p0_6m_d = (p0_6m_m * 6) - loanKV;
+
+            // Render Gói 0%
+            elP0_6m_m.textContent = `${formatVND(p0_6m_m)} đ`;
+            elP0_6m_d.textContent = `+${formatVND(p0_6m_d)} đ`;
+        }
+
+        /**
+         * Reset kết quả hiển thị về 0 đ
+         */
+        function resetOutputs() {
+            elP1_6m_m.textContent = '0 đ';
+            elP1_6m_d.textContent = '0 đ';
+            elP1_9m_m.textContent = '0 đ';
+            elP1_9m_d.textContent = '0 đ';
+            elP1_12m_m.textContent = '0 đ';
+            elP1_12m_d.textContent = '0 đ';
+
+            elP05_6m_m.textContent = '0 đ';
+            elP05_6m_d.textContent = '0 đ';
+            elP05_9m_m.textContent = '0 đ';
+            elP05_9m_d.textContent = '0 đ';
+
+            elP0_6m_m.textContent = '0 đ';
+            elP0_6m_d.textContent = '0 đ';
+        }
+
+        /**
+         * Nút Đặt Lại (Reset All)
+         */
+        function resetAll() {
+            elPrice.value = '';
+            elDownAmount.value = '';
+            elDownPercent.value = '';
+            elLoan.textContent = '0 đ';
+            resetOutputs();
+            showToast('Đã xóa dữ liệu nhập');
+            elPrice.focus();
+        }
+
+        /**
+         * Thiết lập tỷ lệ phần trăm trả trước nhanh (10%, 20%, 30%,...)
+         */
+        function setPresetPercent(percent) {
+            const price = parseCleanNumber(elPrice.value);
+            elDownPercent.value = percent;
+            
+            if (price > 0) {
+                const calculatedAmount = Math.round(price * (percent / 100));
+                // Nếu ô số tiền đang không focus thì định dạng chấm
+                if (document.activeElement !== elDownAmount) {
+                    elDownAmount.value = formatVND(calculatedAmount);
+                } else {
+                    elDownAmount.value = calculatedAmount > 0 ? calculatedAmount.toString() : '';
+                }
+            }
+            calculate();
+        }
+
+        // =========================================================
+        // SỬA LỖI NHẬP LIỆU: BẰNG CÁCH DÙNG EVENT FOCUS & BLUR
+        // - Khi Focus: Chỉ hiện SỐ THUẦN để người dùng nhập/xóa tự nhiên không bị nhảy con trỏ
+        // - Khi Input: Cập nhật công thức ngay lập tức
+        // - Khi Blur: Mới thêm dấu chấm phân cách hàng nghìn
+        // =========================================================
+
+        /**
+         * Gắn bộ xử lý nhập liệu thông minh cho ô tiền
+         */
+        function bindCurrencyInput(inputElement, onInputChangeCallback) {
+            // Khi chọn/nhấp vào ô: Đổi về số thuần
+            inputElement.addEventListener('focus', function() {
+                const rawVal = parseCleanNumber(this.value);
+                this.value = rawVal > 0 ? rawVal.toString() : '';
+            });
+
+            // Khi người dùng đang gõ: Giữ số thuần, loại bỏ ký tự không phải số
+            inputElement.addEventListener('input', function() {
+                // Chỉ giữ lại chữ số
+                this.value = this.value.replace(/[^0-9]/g, '');
+                onInputChangeCallback(parseCleanNumber(this.value));
+            });
+
+            // Khi rời khỏi ô: Định dạng chấm phân cách hàng nghìn
+            inputElement.addEventListener('blur', function() {
+                const rawVal = parseCleanNumber(this.value);
+                if (rawVal > 0) {
+                    this.value = formatVND(rawVal);
+                } else {
+                    this.value = '';
+                }
+            });
+        }
+
+        // 1. Xử lý ô Giá sản phẩm
+        bindCurrencyInput(elPrice, function(rawPrice) {
+            // Nếu có % trả trước sẵn, đồng bộ lại số tiền trả trước
+            const percent = parseFloat(elDownPercent.value) || 0;
+            if (percent > 0 && rawPrice > 0) {
+                const calculatedAmount = Math.round(rawPrice * (percent / 100));
+                if (document.activeElement !== elDownAmount) {
+                    elDownAmount.value = formatVND(calculatedAmount);
+                } else {
+                    elDownAmount.value = calculatedAmount > 0 ? calculatedAmount.toString() : '';
+                }
+            } else if (parseCleanNumber(elDownAmount.value) > 0 && rawPrice > 0) {
+                const downAmount = parseCleanNumber(elDownAmount.value);
+                const newPercent = ((downAmount / rawPrice) * 100).toFixed(1);
+                elDownPercent.value = isFinite(newPercent) ? newPercent : '';
+            }
+            calculate();
+        });
+
+        // 2. Xử lý ô Trả trước (Số tiền)
+        bindCurrencyInput(elDownAmount, function(rawDownAmount) {
+            const price = parseCleanNumber(elPrice.value);
+            if (price > 0) {
+                const calculatedPercent = ((rawDownAmount / price) * 100).toFixed(1);
+                elDownPercent.value = isFinite(calculatedPercent) ? calculatedPercent : '';
+            }
+            calculate();
+        });
+
+        // 3. Xử lý ô Trả trước (%)
+        elDownPercent.addEventListener('input', function() {
+            let percent = parseFloat(this.value);
+            if (percent > 100) {
+                percent = 100;
+                this.value = 100;
+            }
+            
+            const price = parseCleanNumber(elPrice.value);
+            if (price > 0 && !isNaN(percent)) {
+                const calculatedAmount = Math.round(price * (percent / 100));
+                if (document.activeElement !== elDownAmount) {
+                    elDownAmount.value = formatVND(calculatedAmount);
+                } else {
+                    elDownAmount.value = calculatedAmount > 0 ? calculatedAmount.toString() : '';
+                }
+            } else if (isNaN(percent) || percent === 0) {
+                elDownAmount.value = '';
+            }
+
+            calculate();
+        });
+    </script>
+</body>
+</html>
