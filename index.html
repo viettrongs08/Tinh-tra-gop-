@@ -358,74 +358,77 @@
         }
 
         /**
-         * CÔNG THỨC VÀ TÍNH TOÁN TOÀN BỘ BẢNG TÍNH
-         */
-        function calculate() {
-            const price = parseCleanNumber(elPrice.value);
-            const downAmount = parseCleanNumber(elDownAmount.value);
-            
-            // Khoản vay = Giá - Trả trước
-            let loanKV = price - downAmount;
-            if (loanKV < 0) loanKV = 0;
+ * CÔNG THỨC VÀ TÍNH TOÁN TOÀN BỘ BẢNG TÍNH
+ */
+function calculate() {
+    const price = parseCleanNumber(elPrice.value);
+    const downAmount = parseCleanNumber(elDownAmount.value);
+    
+    // Khoản vay = Giá - Trả trước
+    let loanKV = price - downAmount;
+    if (loanKV < 0) loanKV = 0;
 
-            // Hiển thị khoản vay
-            elLoan.textContent = `${formatVND(loanKV)} đ`;
+    // Hiển thị khoản vay
+    elLoan.textContent = `${formatVND(loanKV)} đ`;
 
-            if (price <= 0 || loanKV <= 0) {
-                resetOutputs();
-                return;
-            }
+    if (price <= 0 || loanKV <= 0) {
+        resetOutputs();
+        return;
+    }
 
-            // --- 1. GÓI LÃI SUẤT 1% ---
-            // 6 tháng
-            const p1_6m_m = Math.round(loanKV * (1/6 + 0.005 + 0.013969696969697) + 12000);
-            const p1_6m_d = (p1_6m_m * 6) - loanKV;
-            
-            // 9 tháng
-            const p1_9m_m = Math.round(loanKV * (1/9 + 0.005 + 0.0107777777777778) + 12000);
-            const p1_9m_d = (p1_9m_m * 9) - loanKV;
+    // Hàm làm tròn LÊN hàng nghìn chuẩn HD SAISON
+    const roundThousand = (val) => Math.ceil(val / 1000) * 1000;
 
-            // 12 tháng
-            const p1_12m_m = Math.round(loanKV * (1/12 + 0.005 + 0.00921212121212122) + 12000);
-            const p1_12m_d = (p1_12m_m * 12) - loanKV;
+    // --- 1. GÓI LÃI SUẤT 1% ---
+    // 6 tháng
+    const p1_6m_m = roundThousand(loanKV * (1/6 + 0.005 + 0.01393) + 12000);
+    const p1_6m_d = (p1_6m_m * 6) - loanKV;
+    
+    // 9 tháng
+    const p1_9m_m = roundThousand(loanKV * (1/9 + 0.005 + 0.01074) + 12000);
+    const p1_9m_d = (p1_9m_m * 9) - loanKV;
 
-            // Render Gói 1%
-            elP1_6m_m.textContent = `${formatVND(p1_6m_m)} đ`;
-            elP1_6m_d.textContent = `${formatVND(p1_6m_d)} đ`;
+    // 12 tháng
+    const p1_12m_m = roundThousand(loanKV * (1/12 + 0.005 + 0.009168) + 12000);
+    const p1_12m_d = (p1_12m_m * 12) - loanKV;
 
-            elP1_9m_m.textContent = `${formatVND(p1_9m_m)} đ`;
-            elP1_9m_d.textContent = `${formatVND(p1_9m_d)} đ`;
+    // Render Gói 1%
+    elP1_6m_m.textContent = `${formatVND(p1_6m_m)} đ`;
+    elP1_6m_d.textContent = `${formatVND(p1_6m_d)} đ`;
 
-            elP1_12m_m.textContent = `${formatVND(p1_12m_m)} đ`;
-            elP1_12m_d.textContent = `${formatVND(p1_12m_d)} đ`;
+    elP1_9m_m.textContent = `${formatVND(p1_9m_m)} đ`;
+    elP1_9m_d.textContent = `${formatVND(p1_9m_d)} đ`;
 
-
-            // --- 2. GÓI LÃI SUẤT 0,5% ---
-            // 6 tháng
-            const p05_6m_m = Math.round(loanKV * (1/6 + 0.005 + 0.00869696969696971) + 12000);
-            const p05_6m_d = (p05_6m_m * 6) - loanKV;
-
-            // 9 tháng
-            const p05_9m_m = Math.round(loanKV * (1/9 + 0.005 + 0.00566666666666667) + 12000);
-            const p05_9m_d = (p05_9m_m * 9) - loanKV;
-
-            // Render Gói 0.5%
-            elP05_6m_m.textContent = `${formatVND(p05_6m_m)} đ`;
-            elP05_6m_d.textContent = `${formatVND(p05_6m_d)} đ`;
-
-            elP05_9m_m.textContent = `${formatVND(p05_9m_m)} đ`;
-            elP05_9m_d.textContent = `${formatVND(p05_9m_d)} đ`;
+    elP1_12m_m.textContent = `${formatVND(p1_12m_m)} đ`;
+    elP1_12m_d.textContent = `${formatVND(p1_12m_d)} đ`;
 
 
-            // --- 3. GÓI LÃI SUẤT 0% ---
-            // 6 tháng
-            const p0_6m_m = Math.round((loanKV / 6) + (loanKV / 6) * 0.05 + 12000);
-            const p0_6m_d = (p0_6m_m * 6) - loanKV;
+    // --- 2. GÓI LÃI SUẤT 0,5% ---
+    // 6 tháng
+    const p05_6m_m = roundThousand(loanKV * (1/6 + 0.005 + 0.0086719) + 12000);
+    const p05_6m_d = (p05_6m_m * 6) - loanKV;
 
-            // Render Gói 0%
-            elP0_6m_m.textContent = `${formatVND(p0_6m_m)} đ`;
-            elP0_6m_d.textContent = `${formatVND(p0_6m_d)} đ`;
-        }
+    // 9 tháng
+    const p05_9m_m = roundThousand(loanKV * (1/9 + 0.005 + 0.0056654) + 12000);
+    const p05_9m_d = (p05_9m_m * 9) - loanKV;
+
+    // Render Gói 0.5%
+    elP05_6m_m.textContent = `${formatVND(p05_6m_m)} đ`;
+    elP05_6m_d.textContent = `${formatVND(p05_6m_d)} đ`;
+
+    elP05_9m_m.textContent = `${formatVND(p05_9m_m)} đ`;
+    elP05_9m_d.textContent = `${formatVND(p05_9m_d)} đ`;
+
+
+    // --- 3. GÓI LÃI SUẤT 0% ---
+    // 6 tháng
+    const p0_6m_m = roundThousand((loanKV / 6) + (loanKV / 6) * 0.05 + 12000);
+    const p0_6m_d = (p0_6m_m * 6) - loanKV;
+
+    // Render Gói 0%
+    elP0_6m_m.textContent = `${formatVND(p0_6m_m)} đ`;
+    elP0_6m_d.textContent = `${formatVND(p0_6m_d)} đ`;
+}
 
         /**
          * Reset kết quả hiển thị về 0 đ
